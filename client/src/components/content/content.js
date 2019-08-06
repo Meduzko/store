@@ -19,9 +19,11 @@ class Content extends React.Component {
 
         fetch("http://localhost:5000/data/users")
             .then(response => response.json())
+           // .then(data => console.log(data))
             .then(data => this.setState({
                 name: data
             }));
+
     }
 
     // handleChange(id) {
@@ -39,11 +41,13 @@ class Content extends React.Component {
     // }
 
     render() {
+
       //  const images = this.state.images.map(image => <Image key={image.id} image={image} />);
-        const items = this.state.name.map(item => <Item key={item.id} text={item.name} />);
+     const items = this.state.name.map((item, i) => <Item key={i} text={item.name} />);
+        console.log(this.state);
         return (
             <div className="todo-list">
-               {items}
+                {items}
             </div>
         )
     }

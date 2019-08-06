@@ -12,7 +12,7 @@ function Item(props) {
     {/*<p>{props.item.text}</p>*/}
 
     {/*<div>{props.image.author}</div>*/}
-        <p> Some text </p>
+        <p> {props.text} </p>
     </div>
 )
 }
