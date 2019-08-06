@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -10,23 +12,25 @@ var dataRouter = require('./routes/data');
 
 var app = express();
 
-const mongoose = require("mongoose");
-const MongoClient = require('mongodb').MongoClient;
-
-var uri = "mongodb://mdz:<123>@cluster0-shard-00-00-urkyl.mongodb.net:27017,cluster0-shard-00-01-urkyl.mongodb.net:27017,cluster0-shard-00-02-urkyl.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
-
-mongoose.connect(
-    uri,
-    { useNewUrlParser: true },
-    function(err) {
-      if (err) return console.log(err);
-      server.listen(5000, function() {
-        console.log('Сервер ожидает подключения...');
-      });
+const uri = 'mongodb+srv://mdz:123@cluster0-urkyl.mongodb.net/test?retryWrites=true&w=majority';
+MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
+    if(err) {
+        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
     }
-);
+    app.listen(5000, function() {
+        console.log('Подключение к серверу...');
+      //  const collection = client.db("test").collection("testCollection");
+        // // perform actions on the collection object
+        // collection.find().toArray((err, results) => {
+        //     if (err) {
+        //         console.log(err);
+        //     }
+        //     console.log(results);
+        //     client.close();
+        // });
 
-
+    });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
