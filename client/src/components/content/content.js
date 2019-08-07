@@ -5,7 +5,7 @@ class Content extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: []
+            films: []
         };
     }
 
@@ -19,9 +19,9 @@ class Content extends React.Component {
 
         fetch("http://localhost:5000/data/users")
             .then(response => response.json())
-           // .then(data => console.log(data))
+            // .then(data => console.log(data))
             .then(data => this.setState({
-                name: data
+                films: data
             }));
 
     }
@@ -41,9 +41,8 @@ class Content extends React.Component {
     // }
 
     render() {
-
       //  const images = this.state.images.map(image => <Image key={image.id} image={image} />);
-     const items = this.state.name.map((item, i) => <Item key={i} text={item.name} />);
+        const items = this.state.films.map((item, i) => <Item key={i} opts={item} />);
         console.log(this.state);
         return (
             <div className="todo-list">

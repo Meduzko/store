@@ -21,13 +21,13 @@ router.get('/users', (req, res) => {
         }
         console.log('Fetching data');
 
-        const collection = client.db("test").collection("testCollection");
+        const collection = client.db('sample_mflix').collection('movies');
         // perform actions on the collection object
-        collection.find().toArray((err, results) => {
+        collection.find().limit(10).toArray((err, results) => {
             if (err) {
                 console.log(err);
             }
-            console.log(results);
+          //  console.log(results);
             res.send(results);
             client.close();
         });
