@@ -18,6 +18,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/content" component={Content} />
                     <Route exact path="/not-found" component={Home} />
+                    <div className={'fn-popup-container'}></div>
                 </div>
             </Router>
 
