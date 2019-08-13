@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import RegisterPopup from '../../register/register-popup';
 import LoginPopup from '../../login/login-popup';
 import Event from '../../../utils/dispatcher/EventDispatcher';
+import Overlay from '../popup/overlay';
 
 export default class PopupContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false,
-            popupName: ''
+            popupName: '',
+            enableOverlay: false
         };
     }
 
@@ -38,7 +40,8 @@ export default class PopupContainer extends Component {
            // console.log(details);
             this.setState(state => ({
                 isOpen: !state.isOpen,
-                popupName: details.popupName
+                popupName: details.popupName,
+                enableOverlay: true
             }));
 
             this.popupsMapper();
@@ -50,6 +53,7 @@ export default class PopupContainer extends Component {
             <div className={'fn-popup-container'}>
                 {/*{this.state.isOpen ? this.state.popupName : ''}*/}
                 { this.state.popupName ? this.state.popupName : '' }
+                { this.state.enableOverlay ? <Overlay className={'overlay'}/> : ''}
             </div>
         )
     }
