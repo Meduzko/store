@@ -1,20 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
-import popupDispatcher from '../../utils/dispatcher/popupDispatcher/popupDispatcher';
+import Event from '../../utils/dispatcher/EventDispatcher';
+
 
 export default class Header extends React.Component {
 
-    constructor() {
-        super();
-        this.openPopupBtn = document.querySelector('.fn-popup');
-        this.openPopupBtn.addEventListener('click', () => { this.openPopup() }, false);
-    }
-
-    openPopup = () => {
+    openPopup = (e) => {
+        let targetData = e.target.dataset.openBtn;
         setTimeout(() => {
-            popupDispatcher.trigger('showPopup', {'popupName' : 'loginPopup' });
-        }, 1000);
+            Event.trigger('showPopup', { 'popupName' : targetData, popupProps: { popupName: targetData, isOpen: true }  });
+        }, 0);
     }
 
     render() {
@@ -23,7 +17,8 @@ export default class Header extends React.Component {
                 <ul>
                     <li><a href={"/"}>Home</a></li>
                     <li><a href={"/content"}>Content</a></li>
-                    <li><div className={'fn-popup register-popup'}>Register</div></li>
+                    <li><div className={'fn-popup register-popup'} data-open-btn={'LoginPopup'} onClick={this.openPopup}>Login</div></li>
+                    <li><div className={'fn-popup login-popup'} data-open-btn={'RegisterPopup'} onClick={this.openPopup}>Register</div></li>
                 </ul>
             </div>
         )

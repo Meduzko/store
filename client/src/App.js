@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.scss';
 
 
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Content from './components/content/content';
+import PopupContainer from './components/common/popup/poppupContainer';
 
 
 class App extends React.Component {
@@ -18,7 +18,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/content" component={Content} />
                     <Route exact path="/not-found" component={Home} />
-                    <div className={'fn-popup-container'}></div>
+                    <PopupContainer />
                 </div>
             </Router>
 

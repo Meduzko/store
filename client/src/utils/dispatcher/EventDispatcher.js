@@ -6,11 +6,12 @@ function EventDispatcher() {
     this.off = dummy.removeEventListener.bind(dummy);
     this.on = dummy.addEventListener.bind(dummy);
     this.trigger = function(eventName, data) {
+      //  debugger;
         if( !eventName ) return;
         var event = new CustomEvent(eventName, { "detail" : data} );
         dummy.dispatchEvent(event);
     }
 }
-const EventDispatcherInstance = new EventDispatcher();
+const Event = new EventDispatcher();
 
-export default EventDispatcherInstance;
+export default Event;
