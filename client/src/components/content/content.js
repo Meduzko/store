@@ -1,9 +1,11 @@
 import React from 'react';
 import Item from '../item/item';
+import { openItemInPopup } from '../common/events';
+import Event from "../../utils/dispatcher/EventDispatcher";
 
 class Content extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             films: []
         };
@@ -24,8 +26,18 @@ class Content extends React.Component {
                 films: data
             }));
 
+        this.subscribe();
     }
 
+    subscribe() {
+        // Event.on('showItemInPopup', (e) => {
+        //     //   console.log(e.type, e.detail, e.detail.popupName);
+        //     let details = e.detail;
+        //     console.log(details.itemProps.target);
+        //     console.log(details.itemProps.itemId);
+        //
+        // });
+    }
     // handleChange(id) {
     //     this.setState(prevState => {
     //         const updatedTodos = prevState.todos.map(todo => {
@@ -42,7 +54,7 @@ class Content extends React.Component {
 
     render() {
       //  const images = this.state.images.map(image => <Image key={image.id} image={image} />);
-        const items = this.state.films.map((item, i) => <Item key={i} opts={item} />);
+        const items = this.state.films.map((item) => <Item key={item._id} opts={item} />);
         console.log(this.state);
         return (
             <div className="todo-list">

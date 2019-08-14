@@ -8,7 +8,7 @@ function EventDispatcher() {
     this.trigger = function(eventName, data) {
       //  debugger;
         if( !eventName ) return;
-        var event = new CustomEvent(eventName, { "detail" : data} );
+        var event = new CustomEvent(eventName, { 'detail' : data, bubbles: true, cancelable: true });
         dummy.dispatchEvent(event);
     }
 }

@@ -1,0 +1,33 @@
+/*
+@keyframes delay {
+  0%, 40%, 100% {
+    transform: translate(0%, 0%);
+  }  20% {
+         transform: translate(-50%, -50%);
+     }
+}
+*/
+@keyframes delay {
+  0%, 50% {
+    opacity: .2;
+    transform: translate(-100%, -193%);
+    overflow: hidden;
+  }  100% {
+        transform: translate(0, -50%);
+        opacity: 1;
+     }
+}
+
+.popup-item {
+    position: absolute;
+    background: #fff;
+    z-index: 2;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    animation: delay .3s ease-in-out;
+    overflow: hidden;
+    width: 350px;
+}

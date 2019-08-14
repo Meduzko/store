@@ -4,6 +4,7 @@ import LoginPopup from '../../login/login-popup';
 import Event from '../../../utils/dispatcher/EventDispatcher';
 import Overlay from '../popup/overlay';
 import { closePopup, openPopup } from '../../common/events';
+import ItemPopup from '../../item/itemPopup';
 
 
 export default class PopupContainer extends Component {
@@ -11,7 +12,8 @@ export default class PopupContainer extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            popupName: ''
+            popupName: '',
+            itemPopup: ''
         };
     }
 
@@ -28,6 +30,9 @@ export default class PopupContainer extends Component {
                 break;
             case 'RegisterPopup':
                 this.setState(state => ({ popupName: <RegisterPopup isOpen={ this.state.isOpen } popupName={ this.state.popupName } /> }));
+                break;
+            case 'showItemInPopup':
+                this.setState(state => ({ popupName: <ItemPopup /> }));
                 break;
             default:
                 console.log('Without popup');
@@ -48,11 +53,28 @@ export default class PopupContainer extends Component {
             this.popupsMapper();
         });
 
-        Event.on('hidePopup', e => {
+        Event.on('showItemInPopup', (e) => {
+            //   console.log(e.type, e.detail, e.detail.popupName);
             let details = e.detail;
+
             this.setState(state => ({
                 isOpen: !state.isOpen,
-                popupName: details.popupName,
+                popupName: 'showItemInPopup',
+                itemPopup: details.itemProps.target,
+                enableOverlay: true
+            }));
+
+           let cloneNode = details.itemProps.target.cloneNode(true);
+
+            this.popupsMapper();
+
+            document.querySelector('.popup-item').appendChild(cloneNode);
+        });
+
+        Event.on('hidePopup', () => {
+            this.setState(state => ({
+                isOpen: !state.isOpen,
+                popupName: '',
                 enableOverlay: false
             }));
 
