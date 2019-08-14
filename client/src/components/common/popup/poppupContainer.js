@@ -3,6 +3,8 @@ import RegisterPopup from '../../register/register-popup';
 import LoginPopup from '../../login/login-popup';
 import Event from '../../../utils/dispatcher/EventDispatcher';
 import Overlay from '../popup/overlay';
+import { closePopup, openPopup } from '../../common/events';
+
 
 export default class PopupContainer extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ export default class PopupContainer extends Component {
     }
 
     componentDidMount() {
-        this.handleChange();
+        this.subscribe();
     }
 
     popupsMapper = () => {
@@ -29,11 +31,11 @@ export default class PopupContainer extends Component {
                 this.setState(state => ({ popupName: <RegisterPopup isOpen={ this.state.isOpen } popupName={ this.state.popupName } /> }));
                 break;
             default:
-                console.log("Sorry, we are out ");
+                console.log('Without popup');
         }
     }
 
-    handleChange = () => {
+    subscribe = () => {
         Event.on('showPopup', e => {
             //   console.log(e.type, e.detail, e.detail.popupName);
             let details = e.detail;
@@ -46,14 +48,25 @@ export default class PopupContainer extends Component {
 
             this.popupsMapper();
         });
+
+        Event.on('hidePopup', e => {
+            let details = e.detail;
+            this.setState(state => ({
+                isOpen: !state.isOpen,
+                popupName: details.popupName,
+                enableOverlay: false
+            }));
+
+            this.popupsMapper();
+        });
     }
 
     render() {
         return (
             <div className={'fn-popup-container'}>
                 {/*{this.state.isOpen ? this.state.popupName : ''}*/}
-                { this.state.popupName ? this.state.popupName : '' }
-                { this.state.enableOverlay ? <Overlay className={'overlay'}/> : ''}
+                { this.state.isOpen ? this.state.popupName : '' }
+                { this.state.enableOverlay ? <Overlay className={'overlay'} closePopup={ closePopup } /> : ''}
             </div>
         )
     }
