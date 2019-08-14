@@ -1,0 +1,12 @@
+.header {
+  background: #fafafa;
+
+  &__nav {
+
+    li {
+      display: inline-block;
+      list-style: none;
+      padding: 1em .5em;
+    }
+  }
+}

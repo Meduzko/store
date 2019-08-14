@@ -11,8 +11,7 @@ export default class PopupContainer extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            popupName: '',
-            enableOverlay: false
+            popupName: ''
         };
     }
 
@@ -66,7 +65,7 @@ export default class PopupContainer extends Component {
             <div className={'fn-popup-container'}>
                 {/*{this.state.isOpen ? this.state.popupName : ''}*/}
                 { this.state.isOpen ? this.state.popupName : '' }
-                { this.state.enableOverlay ? <Overlay className={'overlay'} closePopup={ closePopup } /> : ''}
+                { this.state.isOpen ? <Overlay className={'overlay'} closePopup={ closePopup } /> : ''}
             </div>
         )
     }
