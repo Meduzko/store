@@ -13,8 +13,18 @@ var dataRouter = require('./routes/data');
 
 var app = express();
 
+// WORKED on  06.09.2019
+// AWS cluster (meduzko95@gmail.com)
 const uri = 'mongodb+srv://mdz:123@cluster0-urkyl.mongodb.net/test?retryWrites=true&w=majority';
-MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
+
+// Google cloud cluster (apanchuk59@gmail.com)
+//const uri = 'mongodb+srv://mdz:123@store-fyf1s.gcp.mongodb.net/test?retryWrites=true&w=majority';
+//const uri = 'mongodb://btracker:btracker1%40@ds153947.mlab.com:53947/btracker';
+
+var Schema = mongoose.Schema;
+var userScheme = new Schema({ name: { type: String }, avatarUrl: String }, { collection: 'Users' });
+
+mongoose.connect(uri, { useNewUrlParser: true }, (err, client) => {
     if(err) {
         console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
     }
@@ -32,6 +42,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
     });
 });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

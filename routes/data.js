@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 // create a GET route
 router.get('/users', (req, res) => {
     const uri = 'mongodb+srv://mdz:123@cluster0-urkyl.mongodb.net/test?retryWrites=true&w=majority';
+
     MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
         if(err) {
             console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
