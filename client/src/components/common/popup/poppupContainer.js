@@ -55,6 +55,7 @@ export default class PopupContainer extends Component {
 
         Event.on('showItemInPopup', (e) => {
             //   console.log(e.type, e.detail, e.detail.popupName);
+
             let details = e.detail;
 
             this.setState(state => ({

@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Item from '../item/item';
 import { openItemInPopup } from '../common/events';
-import Event from "../../utils/dispatcher/EventDispatcher";
+import Event from '../../utils/dispatcher/EventDispatcher';
+import { addArticle } from '../../actions/index';
 
 class Content extends React.Component {
     constructor(props) {
@@ -54,8 +56,9 @@ class Content extends React.Component {
 
     render() {
       //  const images = this.state.images.map(image => <Image key={image.id} image={image} />);
-        const items = this.state.films.map((item) => <Item key={item._id} opts={item} />);
-        console.log(this.state);
+        const items = this.state.films.map((item) => <Item key={item._id} opts={item} rootProps={this.props}/>);
+       // console.log(this.state);
+        console.log(this.props);
         return (
             <div className="todo-list">
                 {items}
@@ -63,5 +66,14 @@ class Content extends React.Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    articles: state.articles,
+    users: state.users
+});
 
-export default Content;
+const mapActionsToProps = {
+    onAddArticle: addArticle
+};
+
+
+export default connect(mapStateToProps, mapActionsToProps)(Content);

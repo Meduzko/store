@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.scss';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 import Header from './components/header/header';
 import Home from './components/home/home';
@@ -11,20 +11,24 @@ import PopupContainer from './components/common/popup/poppupContainer';
 import store from './store/index';
 import { addArticle } from './actions/index';
 
+//store.subscribe(() => console.log('Look ma, Redux!! ' ));
 
-window.store = store;
-window.addArticle = addArticle;
-store.subscribe(() => console.log('Look ma, Redux!!'))
+class App extends Component {
 
-class App extends React.Component {
-
-    handleSubmit = ()=> {
-        store.dispatch( addArticle({ title: 'React Redux Tutorial for Beginners', id: 1 }) );
+    constructor(props) {
+        super(props);
     }
 
+    // handleSubmit = ()=> {
+    //   //  store.dispatch( addArticle( {article: 'New article about...', id: 1}) );
+    //     this.props.onAddArticle({ article: 'New article about...', id: 1 });
+    //     console.log(store.getState());
+    //
+    // };
+
     render() {
+        console.log(this.props);
         return (
-            <Provider store={store}>
                 <Router>
                     <div className="App">
                         <Header />
@@ -34,18 +38,26 @@ class App extends React.Component {
                                 <button onClick={this.handleSubmit} className={"plusBtn"}>Plus</button>
                             </div>
                             <div>
-                                <button className={"minusBtn"}>Minus</button>
+                                <button data-value={this.props} className={"minusBtn"}>Minus</button>
                             </div>
-                            <div>Value: {} </div>
                         </div>
                         <Route exact path="/content" component={Content} />
                         <Route exact path="/not-found" component={Home} />
                         <PopupContainer />
                     </div>
                 </Router>
-            </Provider>
         );
     }
 }
 
+// const mapStateToProps = state => ({
+//     articles: state.articles,
+//     users: state.users
+// });
+//
+// const mapActionsToProps = {
+//     onAddArticle: addArticle
+// };
+
+//export default connect(mapStateToProps, mapActionsToProps)(App);
 export default App;
