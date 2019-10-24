@@ -3,7 +3,13 @@ import { ADD_ARTICLE } from '../constants/action-types';
 
 const initialState = {
     users: {},
-    articles: {}
+    articles: {},
+    products: [],
+    checkedID: {},
+    cards: {
+        isOpen: false,
+
+    },
 };
 
 // function rootReducer(state = initialState, action) {
@@ -65,6 +71,20 @@ const initialState = {
 //     }
 // }
 
+// const chosenItem = (state, id) => {
+//     const selectedItem = state.products ? state.products.result : {};
+//     let currentItem;
+//
+//     selectedItem.map((item) => {
+//         if (item._id === id) {
+//             currentItem = item;
+//         }
+//         return currentItem = item;
+//     });
+//
+//     return currentItem;
+// };
+
 export const articlesReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_ARTICLE:
@@ -99,7 +119,43 @@ export const usersReducer = (state = initialState.users, action) => {
     }
 };
 
+export const productsReducer = (state = initialState.checkedID, action) => {
+    switch (action.type) {
+        case 'ADD_PRODUCTS':
+            return {
+                ...state,
+                products: action.payload
+            };
+        case 'OPEN_PRODUCT':
+            const { targetDataId } = action.payload;
+
+            return {
+                ...state,
+                id: targetDataId
+                // ...state.products,
+                // isChecked: isChecked,
+                // chosenItem: chosenItem(state, id)
+              //  ...state,
+             //   Object.assign({}, targetDataId)
+            };
+
+        case 'HANDLE_OPENING':
+            return {
+                ...state,
+                openedId: action.id
+            };
+        case 'GET_ERRORS':
+            return {
+                ...state,
+                loginErrors: action.payload
+            };
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     articles: articlesReducer,
-    users: usersReducer
+    users: usersReducer,
+    products: productsReducer
 });
