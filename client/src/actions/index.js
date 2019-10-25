@@ -1,5 +1,5 @@
 import { ADD_ARTICLE } from '../constants/action-types';
-import ProductService from '../services/productService';
+import PlaceholderService from '../services/placeholderService';
 
 export const addArticle = (payload) => {
     return {
@@ -9,10 +9,13 @@ export const addArticle = (payload) => {
 };
 
 export const getProducts = () => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
-            const data = await ProductService.getDefaultProducts();
-            dispatch({ type: 'GET_PRODUCTS', data });
+            const data = await PlaceholderService.getDefaultPlaceholder();
+            dispatch({
+                type: 'GET_PRODUCTS',
+                payload: data
+            });
             console.log(data);
         } catch (error) {
             console.error(error);
