@@ -9,10 +9,14 @@ import { getProducts } from '../../actions/index';
 class Content extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            itemID: ''
+        }
     }
     componentWillMount = () => {
         this.props.getProducts();
-    };
+    }
 
     // componentDidMount = () => {
     //
@@ -26,9 +30,10 @@ class Content extends React.Component {
     //         });
     // };
 
-    handleItemClick = (itemId) => {
-        console.log('Item was clicked ', itemId);
-    };
+    handleItemClick = (e) => {
+      let target = e.currentTarget;
+        console.log('Item was clicked ', target.dataset.id);
+    }
 
     render() {
         console.log(this.props);
@@ -37,7 +42,7 @@ class Content extends React.Component {
         // items.products.map(item => console.log(item));
 
           const items = this.props.products.map(item =>
-                    <Item key={item.id} opts={item} props={this.props}/>
+                    <Item onClick={ this.handleItemClick } key={item.id} opts={item} />
               );
     //    const items = this.state.products.map((item) => <Item onItemClick={ this.handleItemClick } key={item._id} opts={item} props={this.props}/>);
         return (
