@@ -1,18 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/index';
+import { productsReducer } from '../reducers/rootReducer'
 
-// const initialState = {
-//     articles: [{article: 'My default pre-render article', id: 0}],
-//     users: [{userName: 'Test', password: 123}]
-// };
-
-const initialState = {};
 
 const middleware = [thunk];
+const initialState = {
+    initialState: {
+        isLoggined: false
+    }
+};
 
 const store = createStore(
-    rootReducer,
+    productsReducer,
     initialState,
     compose(
         applyMiddleware(...middleware),

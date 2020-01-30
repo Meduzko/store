@@ -1,25 +1,7 @@
-import { ADD_ARTICLE } from '../constants/action-types';
+import { combineReducers } from 'redux';
 
-const initialState = {
+export const initialState = {
     products: []
-};
-
-
-export const articlesReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_ARTICLE:
-            return {
-                ...state,
-                articles: action.payload
-            };
-        case 'GET_ERRORS':
-            return {
-                ...state,
-                loginErrors: action.payload
-            };
-        default:
-            return state;
-    }
 };
 
 export const productsReducer = (state = initialState, action) => {
@@ -48,3 +30,9 @@ export const productsReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+// const reducer = combineReducers({
+//     productState: productsReducer
+//   })
+  
+//const store = createStore(productsReducer, initialState)

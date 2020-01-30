@@ -5,9 +5,7 @@ import Home from './components/home/home';
 import Content from './components/content/content';
 import PopupContainer from './components/common/popup/poppupContainer';
 import store from './store';
-import { Provider } from 'react-redux';
 import './App.scss';
-
 
 class App extends Component {
 
@@ -15,10 +13,13 @@ class App extends Component {
         super(props);
     }
 
+    handleSubmit = () => {
+        console.log(store.getState());
+    }
+
     render() {
         console.log(this.props);
         return (
-            <Provider store={store}>
                 <Router>
                     <div className="App">
                         <Header />
@@ -36,10 +37,8 @@ class App extends Component {
                         <PopupContainer />
                     </div>
                 </Router>
-            </Provider>
         );
     }
 }
-
 
 export default App;
