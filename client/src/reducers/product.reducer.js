@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-
-export const initialState = {
+const initialState = {
+    isProductsLoad: false,
     products: []
 };
+
 
 export const productsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -14,7 +14,8 @@ export const productsReducer = (state = initialState, action) => {
         case 'GET_PRODUCTS':
             return {
                 ...state,
-                products: action.payload
+                products: action.payload,
+                isProductsLoad: !state.isProductsLoad
             };
         case 'HANDLE_OPENING':
             return {
@@ -30,9 +31,3 @@ export const productsReducer = (state = initialState, action) => {
             return state;
     }
 };
-
-// const reducer = combineReducers({
-//     productState: productsReducer
-//   })
-  
-//const store = createStore(productsReducer, initialState)

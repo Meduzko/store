@@ -14,9 +14,9 @@ class PlaceholderService {
             throw new Error(`ProductService getDefaultProducts failed, HTTP status ${response.status}`);
         }
 
-        let data = await response.json();
+       let data = await response.json();
 
-        return data.slice(0, 10);
+       return data.slice(0, 10);
     }
 }
 

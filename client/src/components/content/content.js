@@ -2,30 +2,38 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Item from '../item/item';
-import { getProducts } from '../../actions/index';
+import { getProducts, login } from '../../actions/index';
 
 class Content extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            itemID: ''
-        }
+            itemID: '123',
+            isLogged: this.props.userModel.isLogged,
+            isProductsLoaded: false
+        };
 
     //    this.props.getProducts();
     //    this.props.getProductsFn();
         console.log(this.props);
     }
 
-    componentWillMount = () => {
-       this.props.getProducts();
-    }
-
     componentDidMount = () => {
+        this.props.getProducts().then((data) => {
+            console.log('data was loading ');
+
+            this.setState({
+                ...this.state,
+                products: this.props.productState.products,
+                isProductsLoaded: this.props.productState.isProductsLoaded
+            });
+        });
+        // this.props.getProducts();
     //   const products = this.props.getProducts();
 
         // console.log(this.props);
-    
+
         // PlaceholderService.getDefaultPlaceholder()
         //     .then((result) => {
         //         console.log(result);
@@ -39,12 +47,29 @@ class Content extends React.Component {
     _getProducts = () => {
     //   let target = e.currentTarget;
     //     console.log('Item was clicked ', target.dataset.id);
-    }
+       // this.setState({...this.state, isLogged: !this.state.isLogged })
+    //    this.props.login({userName: 'ALSSS', userID: '234'})
+
+        console.log('Another console');
+
+    };
 
     render() {
+        let products;
         console.log(this.props);
-        const items = this.props.products || [];
-        // items.products.map(item => console.log(item));
+        console.log(this.state);
+        const isProductsLoad = this.state.isProductsLoaded;
+
+        products = isProductsLoad ? this.state.products : [];
+
+        console.log(products);
+     //   const items = products.map(item => <Item key={item.id} opts={item} />);
+
+        try {
+            products.map(item => console.log(item));
+        } catch (e) {
+            console.log(e);
+        }
 
         // items.map(item =>
         //             <Item onClick={ this.handleItemClick } key={item.id} opts={item} />
@@ -52,8 +77,8 @@ class Content extends React.Component {
     //    const items = this.state.products.map((item) => <Item onItemClick={ this.handleItemClick } key={item._id} opts={item} props={this.props}/>);
         return (
             <div className='todo-list'>
-                <div onClick={ this._getProducts }>Handle products loading</div>
-                {/*{ this.state.isPageLoading ? <p>Loading...</p> : items }*/}
+                <div onClick={ this._getProducts }>Handle products loading, {isProductsLoad} </div>
+                {/*{ !isProductsLoad ? <p>Loading...</p> : items}*/}
                 {/*<p>Loading...</p>*/}
                {/* <div>{items}</div> */}
             </div>
@@ -72,17 +97,15 @@ Content.propTypes = {
 // });
 
 const mapStateToProps = state => ({
-    isLoggined: state.initialState.isLoggined,
-    products: state.items
+    productState: state.productState,
+    userModel: state.userState,
+    itemID: state.itemID,
+    appState: state.appState
 });
 
 
-// const mapStateToProps = function(state) {
-//     return {
-//       profile: state.user.profile,
-//       loggedIn: state.auth.loggedIn
-//     }
-//   }
-
 // export default connect(mapStateToProps, {getProducts})(Content);
-export default connect(mapStateToProps)(Content);
+export default connect(
+    mapStateToProps,
+    { login, getProducts }
+)(Content);

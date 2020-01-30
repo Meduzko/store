@@ -1,12 +1,4 @@
-import { ADD_ARTICLE } from '../constants/action-types';
 import PlaceholderService from '../services/placeholderService';
-
-export const addArticle = (payload) => {
-    return {
-        type: ADD_ARTICLE,
-        payload
-    }
-};
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -21,6 +13,13 @@ export const getProducts = () => {
             console.error(error);
         }
     }
+};
+
+export const login = payload => dispatch => {
+    dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: payload
+    });
 };
 
 export const addProducts = (payload) => {
@@ -43,14 +42,4 @@ export const handleOpening = (id) => {
         type: 'HANDLE_OPENING',
         id
     }
-};
-
-
-let nextTodoId = 0;
-export const addTodo = (task) => {
-    return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        task
-    };
 };
