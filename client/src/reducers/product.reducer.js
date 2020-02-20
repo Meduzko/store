@@ -17,6 +17,12 @@ export const productsReducer = (state = initialState, action) => {
                 products: action.payload,
                 isProductsLoad: !state.isProductsLoad
             };
+        case 'LOAD_PRODUCTS':
+            return {
+                ...state,
+                products: action.payload,
+                isProductsLoad: !state.isProductsLoad
+            }
         case 'HANDLE_OPENING':
             return {
                 ...state,

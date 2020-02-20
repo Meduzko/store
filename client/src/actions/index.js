@@ -15,6 +15,13 @@ export const getProducts = () => {
     }
 };
 
+export const loadProducts = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.data
+    })
+};
+
 export const login = payload => dispatch => {
     dispatch({
         type: 'SET_CURRENT_USER',

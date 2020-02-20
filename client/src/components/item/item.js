@@ -25,17 +25,16 @@ const useStyles = makeStyles({
 
 export default function Item(props) {
     const classes = useStyles();
-    const { id } = props.opts;
 
-    console.log(props, id);
     const defaultUrl = 'https://res.cloudinary.com/practicaldev/image/fetch/s--bIcIUu5D--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/t7u2rdii5u9n4zyqs2aa.jpg';
+
+    // const { thumbnailUrl } = this.props.props;
     return (
         <Card className={classes.card } >
-            <CardActionArea  onClick={ (e) => props.onClick(e) } data-item={'gallery-item'} data-id={props.opts.id} data-open={props.opts.isChecked}>
-            {/*<CardActionArea onClick={ (e) => props.onClick(e) } data-item={'gallery-item'} data-id={props.opts._id} data-open={props.opts.isChecked}>*/}
+            <CardActionArea  data-item={'gallery-item'}>
                 <CardMedia
                     className={classes.media}
-                    image={props.opts.thumbnailUrl ? props.opts.thumbnailUrl : defaultUrl}
+                    image={props.image || defaultUrl }
                     title="Contemplative Reptile"
                 />
                 <CardContent>
