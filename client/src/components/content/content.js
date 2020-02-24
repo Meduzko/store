@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Item from '../item/item';
-import { getProducts, loadProducts, login } from '../../actions/index';
+import { getProducts, loadProducts, login, openProduct } from '../../actions/index';
 import PlaceholderService from '../../services/placeholderService';
 
 class Content extends React.Component {
@@ -12,13 +12,14 @@ class Content extends React.Component {
         this.state = {
             products: '',
             isLogged: this.props.userModel.isLogged,
-            isProductsLoaded: false
+            isProductsLoaded: false,
+            selectedEl: null
         };
-        
+
         console.log(this.props);
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         PlaceholderService.getDefaultPlaceholder()
             .then((result) => {
                 console.log(result);
@@ -32,8 +33,28 @@ class Content extends React.Component {
             });
     };
 
+    componentWillUnmount = () => {
+
+    };
+
     _getProducts = () => {
         console.log('Another console');
+    };
+
+    selectItem = e => {
+        let item = e.currentTarget.parentElement;
+
+        let id = parseInt(item.getAttribute('data-id'));
+        let product = this.state.products.filter(el => el.id === id);
+
+        this.setState({
+            ...this.state,
+            selectedEl: product[0]
+        });
+
+       this.props.openProduct({type: 'HANDLE_OPENING', data: product[0]});
+
+       console.log(product[0]);
     };
 
     render() {
@@ -41,7 +62,7 @@ class Content extends React.Component {
         let items;
 
         if (products) {
-            items = products.map((item, i) => <Item key={item.id} image={item.thumbnailUrl}/>);
+            items = products.map((item, i) => <Item key={item.id} selectItem={this.selectItem} id={item.id} image={item.thumbnailUrl} props={this.props}/>);
         }
 
         return (
@@ -68,5 +89,5 @@ const mapStateToProps = state => ({
 // export default connect(mapStateToProps, {getProducts})(Content);
 export default connect(
     mapStateToProps,
-    { login, getProducts, loadProducts }
+    { login, getProducts, loadProducts, openProduct }
 )(Content);

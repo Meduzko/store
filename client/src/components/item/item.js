@@ -7,9 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { openItemInPopup } from '../common/events';
-import store from "../../store";
-import {handleOpening, openProduct} from "../../actions";
+
 
 const useStyles = makeStyles({
     card: {
@@ -26,12 +24,14 @@ const useStyles = makeStyles({
 export default function Item(props) {
     const classes = useStyles();
 
+  //  console.log(props);
+
     const defaultUrl = 'https://res.cloudinary.com/practicaldev/image/fetch/s--bIcIUu5D--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/t7u2rdii5u9n4zyqs2aa.jpg';
 
     // const { thumbnailUrl } = this.props.props;
     return (
-        <Card className={classes.card } >
-            <CardActionArea  data-item={'gallery-item'}>
+        <Card className={classes.card } data-id={props.id}>
+            <CardActionArea data-item={'gallery-item'} onClick={props.selectItem}>
                 <CardMedia
                     className={classes.media}
                     image={props.image || defaultUrl }
