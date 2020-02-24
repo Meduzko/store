@@ -3,12 +3,10 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Content from './components/content/content';
-import PopupContainer from './components/common/popup/poppupContainer';
-import store from './store';
+import PopupContainer from './components/containers/PopupContainer';
 import './App.scss';
 
 class App extends Component {
-
     constructor(props) {
         super(props);
     }

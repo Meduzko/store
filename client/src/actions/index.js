@@ -36,12 +36,11 @@ export const addProducts = (payload) => {
     }
 };
 
-export const openProduct = (payload, id) => {
-    return {
-        type: 'OPEN_PRODUCT',
-        payload,
-        id
-    }
+export const openProduct = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.data
+    })
 };
 
 export const handleOpening = (id) => {

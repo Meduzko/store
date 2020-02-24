@@ -1,6 +1,7 @@
 const initialState = {
     isProductsLoad: false,
-    products: []
+    products: [],
+    currentOpenedProduct: ''
 };
 
 
@@ -22,11 +23,11 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 products: action.payload,
                 isProductsLoad: !state.isProductsLoad
-            }
+            };
         case 'HANDLE_OPENING':
             return {
                 ...state,
-                openedId: action.id
+                currentOpenedProduct: action.payload
             };
         case 'GET_ERRORS':
             return {
