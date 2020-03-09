@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Item from '../item/item';
-import { getProducts, loadProducts, login, openProduct } from '../../actions/index';
+import { getProducts, loadProducts, login, openProductModal } from '../../actions/index';
 import PlaceholderService from '../../services/placeholderService';
 
 class Content extends React.Component {
@@ -52,7 +52,7 @@ class Content extends React.Component {
             selectedEl: product[0]
         });
 
-       this.props.openProduct({type: 'HANDLE_OPENING', data: product[0]});
+       this.props.openProductModal({type: 'OPEN_MODAL', data: product[0]});
 
        console.log(product[0]);
     };
@@ -66,8 +66,10 @@ class Content extends React.Component {
         }
 
         return (
-            <div className='todo-list'>
-                { isProductsLoaded ? items : <p>Loading...</p> }
+            <div>
+                <div className='store-list'>
+                    { isProductsLoaded ? items : <p>Loading...</p> }
+                </div>
             </div>
         )
     }
@@ -83,11 +85,12 @@ const mapStateToProps = state => ({
     productState: state.productState,
     userModel: state.userState,
     itemID: state.itemID,
-    appState: state.appState
+    appState: state.appState,
+    modalState: state.modalState
 });
 
 // export default connect(mapStateToProps, {getProducts})(Content);
 export default connect(
     mapStateToProps,
-    { login, getProducts, loadProducts, openProduct }
+    { login, getProducts, loadProducts, openProductModal }
 )(Content);

@@ -36,10 +36,17 @@ export const addProducts = (payload) => {
     }
 };
 
-export const openProduct = payload => dispatch => {
+// Product modal
+export const openProductModal = payload => dispatch => {
     dispatch({
         type: payload.type,
         payload: payload.data
+    })
+};
+
+export const hideProductModal = payload => dispatch => {
+    dispatch({
+        type: payload.type
     })
 };
 

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Content from './components/content/content';
-import PopupContainer from './components/containers/PopupContainer';
+import ModalContainer from './components/containers/ModalContainer';
 import './App.scss';
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/content" component={Content} />
                         <Route exact path="/not-found" component={Home} />
-                        <PopupContainer />
+                        <ModalContainer />
                     </div>
                 </Router>
         );

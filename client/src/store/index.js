@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { productsReducer } from "../reducers/product.reducer";
 import { userReducer } from "../reducers/user.reducer";
 import { rootReducer } from "../reducers/root.reducer";
+import { modalReducer } from "../reducers/modal.reducer";
 
 const middleware = [thunk];
 
@@ -10,7 +11,8 @@ const middleware = [thunk];
 const reducer = combineReducers({
     productState: productsReducer,
     userState: userReducer,
-    appState: rootReducer
+    appState: rootReducer,
+    modalState: modalReducer
 });
 
 
