@@ -16,10 +16,11 @@ export const modalReducer = (state = initialState, action) => {
                 ...state,
                 isOpen: !state.isOpen
             };
-        case 'GET_ERRORS':
+        case 'CLOSE_MODAL':
             return {
                 ...state,
-                loginErrors: action.payload
+                currentOpenedProduct: '',
+                isOpen: !state.isOpen
             };
         default:
             return state;

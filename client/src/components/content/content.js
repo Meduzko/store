@@ -8,6 +8,7 @@ import PlaceholderService from '../../services/placeholderService';
 class Content extends React.Component {
     constructor(props) {
         super(props);
+        this._isMounted = false;
 
         this.state = {
             products: '',
@@ -20,10 +21,13 @@ class Content extends React.Component {
     }
 
     componentWillMount = () => {
-        PlaceholderService.getDefaultPlaceholder()
+        this._isMounted = true;
+
+        this._isMounted && PlaceholderService.getDefaultPlaceholder()
             .then((result) => {
                 console.log(result);
-                this.setState({
+
+                this._isMounted && this.setState({
                     ...this.state,
                     products: result,
                     isProductsLoaded: !this.state.isProductsLoaded
@@ -33,9 +37,9 @@ class Content extends React.Component {
             });
     };
 
-    componentWillUnmount = () => {
-
-    };
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
     _getProducts = () => {
         console.log('Another console');

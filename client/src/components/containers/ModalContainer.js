@@ -1,17 +1,25 @@
 import React from 'react';
 import ProductModal from '../product-modal/ProductModal';
 import { connect } from 'react-redux';
-import { openProductModal, hideProductModal } from '../../actions/index';
+import { openProductModal, hideProductModal, closeProductModal } from '../../actions/index';
+import { Overlay } from '../overlay/Overlay';
 
 class ModalContainer extends React.Component {
+    componentDidMount = () => {
+        console.log('Modal Container is Mount');
+    };
+
+    componentWillUnmount = () => {
+        console.log('Modal Container is Unmount');
+    };
+
     render() {
-        let openedProduct = this.props.modalState.currentOpenedProduct;
-        let isOpened = openedProduct ? true : false;
+        const { currentOpenedProduct, isOpen } = this.props.modalState;
 
         return (
             <div className={'modal-container'}>
-                <ProductModal {...this.props.modalState} onHide={this.props.hideProductModal} />
-                {/*{ openedProduct ? <Overlay /> : '' }*/}
+                { currentOpenedProduct ? <ProductModal {...this.props.modalState} onHide={this.props.hideProductModal} onClose={this.props.closeProductModal} /> : null }
+                { isOpen ? <Overlay onHide={this.props.hideProductModal} /> : null }
             </div>
         )
     }
@@ -23,6 +31,6 @@ const mapStateToProps = state => ({
     appState: state.appState
 });
 
-export default connect(mapStateToProps, 
-    {openProductModal, hideProductModal })
+export default connect(mapStateToProps,
+    { openProductModal, hideProductModal, closeProductModal })
 (ModalContainer);

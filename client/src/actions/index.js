@@ -44,6 +44,12 @@ export const openProductModal = payload => dispatch => {
     })
 };
 
+export const closeProductModal = payload => dispatch => {
+    dispatch({
+        type: payload.type
+    })
+};
+
 export const hideProductModal = payload => dispatch => {
     dispatch({
         type: payload.type

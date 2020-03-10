@@ -16,7 +16,7 @@ class PlaceholderService {
 
        let data = await response.json();
 
-       return data.slice(0, 10);
+       return data.slice(0, 50);
     }
 }
 
