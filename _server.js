@@ -10,6 +10,7 @@ var MongoClient = require('mongodb').MongoClient;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dataRouter = require('./routes/data');
+var placeholderRouter = require('./routes/placeholder');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/test', usersRouter);
 app.use('/data', dataRouter);
+app.use('/products', placeholderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

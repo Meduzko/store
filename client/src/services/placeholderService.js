@@ -1,4 +1,5 @@
-const PRODUCTS_URL = 'https://jsonplaceholder.typicode.com/albums/1/photos';
+// const PRODUCTS_URL = 'https://jsonplaceholder.typicode.com/albums/1/photos';
+const PRODUCTS_URL = 'http://localhost:5000/products';
 
 class PlaceholderService {
 
