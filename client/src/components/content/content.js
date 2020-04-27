@@ -57,8 +57,6 @@ class Content extends React.Component {
         });
 
        this.props.openProductModal({type: 'OPEN_MODAL', data: product[0]});
-
-       console.log(product[0]);
     };
 
     render() {
@@ -90,7 +88,8 @@ const mapStateToProps = state => ({
     userModel: state.userState,
     itemID: state.itemID,
     appState: state.appState,
-    modalState: state.modalState
+    modalState: state.modalState,
+    basketState: state.basketState
 });
 
 // export default connect(mapStateToProps, {getProducts})(Content);

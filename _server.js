@@ -22,28 +22,31 @@ const uri = 'mongodb+srv://mdz:123@cluster0-urkyl.mongodb.net/test?retryWrites=t
 //const uri = 'mongodb+srv://mdz:123@store-fyf1s.gcp.mongodb.net/test?retryWrites=true&w=majority';
 //const uri = 'mongodb://btracker:btracker1%40@ds153947.mlab.com:53947/btracker';
 
-var Schema = mongoose.Schema;
-var userScheme = new Schema({ name: { type: String }, avatarUrl: String }, { collection: 'Users' });
+// var Schema = mongoose.Schema;
+// var userScheme = new Schema({ name: { type: String }, avatarUrl: String }, { collection: 'Users' });
+//
+// mongoose.connect(uri, { useNewUrlParser: true }, (err, client) => {
+//     if(err) {
+//         console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
+//     }
+//     app.listen(5000, function() {
+//         console.log('Подключение к серверу...');
+//       //  const collection = client.db("test").collection("testCollection");
+//         // // perform actions on the collection object
+//         // collection.find().toArray((err, results) => {
+//         //     if (err) {
+//         //         console.log(err);
+//         //     }
+//         //     console.log(results);
+//         //     client.close();
+//         // });
+//
+//     });
+// });
 
-mongoose.connect(uri, { useNewUrlParser: true }, (err, client) => {
-    if(err) {
-        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-    }
-    app.listen(5000, function() {
-        console.log('Подключение к серверу...');
-      //  const collection = client.db("test").collection("testCollection");
-        // // perform actions on the collection object
-        // collection.find().toArray((err, results) => {
-        //     if (err) {
-        //         console.log(err);
-        //     }
-        //     console.log(results);
-        //     client.close();
-        // });
-
-    });
+app.listen(5000, function () {
+    console.log('Подключение к серверу...');
 });
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

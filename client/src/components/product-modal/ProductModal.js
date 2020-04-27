@@ -15,6 +15,10 @@ class ProductModal extends React.Component {
         this.props.onClose({type: 'CLOSE_MODAL'});
     };
 
+    addToBasket = () => {
+        this.props.addToBasket({type: 'ADD_ITEM', product: { item: this.props.currentOpenedProduct, count: 1 }});
+    };
+
     componentWillUnmount = () => {
         console.log('Product Modal is Unmount');
     };
@@ -36,6 +40,7 @@ class ProductModal extends React.Component {
             <div className={`product-container ${this.props.isOpen ? 'open' : ''}` }>
                 <div className={'product-container__close-icon'} onClick={this.close}>X</div>
                 <div className={'product-title'}>{title}</div>
+                <div className={'add-item'} onClick={this.addToBasket}>Add item to order</div>
                 <div className={'product-content'}>
                     <h3> {title} </h3>
                     <div className={'product-content__product-image'}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductModal from '../product-modal/ProductModal';
 import { connect } from 'react-redux';
-import { openProductModal, hideProductModal, closeProductModal } from '../../actions/index';
+import { openProductModal, hideProductModal, closeProductModal, addToBasket } from '../../actions/index';
 import { Overlay } from '../overlay/Overlay';
 
 class ModalContainer extends React.Component {
@@ -18,7 +18,13 @@ class ModalContainer extends React.Component {
 
         return (
             <div className={'modal-container'}>
-                { currentOpenedProduct ? <ProductModal {...this.props.modalState} onHide={this.props.hideProductModal} onClose={this.props.closeProductModal} /> : null }
+                { currentOpenedProduct
+                    ?  <ProductModal {...this.props.modalState}
+                           onHide={ this.props.hideProductModal }
+                           onClose={ this.props.closeProductModal }
+                           addToBasket={ this.props.addToBasket }/>
+                    :  null }
+
                 { isOpen ? <Overlay onHide={this.props.hideProductModal} /> : null }
             </div>
         )
@@ -32,5 +38,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,
-    { openProductModal, hideProductModal, closeProductModal })
+    { openProductModal, hideProductModal, closeProductModal, addToBasket })
 (ModalContainer);

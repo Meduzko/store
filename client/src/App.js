@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Content from './components/content/content';
+import Basket from './components/basket/basket';
 import ModalContainer from './components/containers/ModalContainer';
 import './App.scss';
 
@@ -17,6 +18,7 @@ class App extends Component {
                 <Router>
                     <div className="App">
                         <Header />
+                        <Basket />
                         <Route exact path="/" component={Home} />
                         <Route exact path="/content" component={Content} />
                         <Route exact path="/not-found" component={Home} />

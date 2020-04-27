@@ -4,8 +4,6 @@ var productsPlaceholder = require('../public/placeholderJSON/products');
 
 
 router.get('/', function(req, res, next) {
-
-
     res.send(productsPlaceholder);
 });
 

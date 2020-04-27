@@ -5,13 +5,13 @@ const mongoose = require("mongoose");
 
 
 
-var Schema = mongoose.Schema;
-var userScheme = new Schema({ name: { type: String }, avatarUrl: String }, { collection: 'Users' });
-var Users = mongoose.model('Users', userScheme);
-
-mongoose.connection.on('open', function() {
-    console.log('mongodb is connected!!');
-});
+// var Schema = mongoose.Schema;
+// var userScheme = new Schema({ name: { type: String }, avatarUrl: String }, { collection: 'Users' });
+// var Users = mongoose.model('Users', userScheme);
+//
+// mongoose.connection.on('open', function() {
+//     console.log('mongodb is connected!!');
+// });
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));

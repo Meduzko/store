@@ -62,3 +62,33 @@ export const handleOpening = (id) => {
         id
     }
 };
+
+// Basket component
+export const addToBasket = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.product
+    })
+};
+
+export const removeFromBasket = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.payload
+    })
+};
+
+export const increaseCount = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.payload
+    })
+};
+
+export const decreaseCount = payload => dispatch => {
+    dispatch({
+        type: payload.type,
+        payload: payload.payload
+    })
+};
+
