@@ -3,12 +3,13 @@ var express = require('express');
 var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var MongoClient = require('mongodb').MongoClient;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 var dataRouter = require('./routes/data');
 var placeholderRouter = require('./routes/placeholder');
 
@@ -44,6 +45,7 @@ const uri = 'mongodb+srv://mdz:123@cluster0-urkyl.mongodb.net/test?retryWrites=t
 //     });
 // });
 
+
 app.listen(5000, function () {
     console.log('Подключение к серверу...');
 });
@@ -56,11 +58,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/test', usersRouter);
+app.use('/login', loginRouter);
 app.use('/data', dataRouter);
 app.use('/products', placeholderRouter);
 

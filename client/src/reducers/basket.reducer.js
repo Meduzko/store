@@ -1,9 +1,11 @@
 const initialState = {
-    products: []
+    products: [],
+    totalPrice: 0
 };
 
-const addItem = (products, payload) => {
-    const { id } = payload.item;
+const addItem = (state, payload) => {
+    const { id, price } = payload.item;
+    const { products } = state;
     const isExistingItem = products.filter(product => product.item.id === id);
 
     if (isExistingItem.length > 0) {
@@ -12,34 +14,34 @@ const addItem = (products, payload) => {
        return [...products];
     }
 
+    state.totalPrice = state.totalPrice += setTotalPrice(payload);
     return [...products, payload];
 };
 
-const setItemCount = (products, payload) => {
-    const { id } = payload.item;
-    const { increase, decrease } = payload;
-    const isExistingItem = products.filter(product => product.item.id === id);
+const increaseCount = (state, item) => {
+    const { products } = state;
 
-    if (isExistingItem.length > 0 && increase) {
-        isExistingItem[0].count++;
-    } else {
-        isExistingItem[0].count--;
-    }
-
-    return [...products];
-};
-
-const increaseCount = (products, item) => {
     item.count++;
+    state.totalPrice += item.item.price;
 
     return [...products];
 };
-const decreaseCount = (products, item) => {
+
+const decreaseCount = (state, item) => {
+    const { products } = state;
+
     if (item.count > 1) {
         item.count--;
+        state.totalPrice -= item.item.price;
     }
 
     return [...products];
+};
+
+const setTotalPrice = (item) => {
+    const { count } = item;
+
+    return count * item.item.price;
 };
 
 export const basketReducer = (state = initialState, action) => {
@@ -47,22 +49,23 @@ export const basketReducer = (state = initialState, action) => {
         case 'ADD_ITEM':
             return {
                 ...state,
-                products: addItem(state.products, action.payload)
+                products: addItem(state, action.payload),
             };
         case 'REMOVE_ITEM':
            return {
                ...state,
-               products: state.products.filter(i => i.item.id !== action.payload.item.id)
+               products: state.products.filter(i => i.item.id !== action.payload.item.id),
+               totalPrice: state.totalPrice -= setTotalPrice(action.payload)
            };
         case 'INCREASE_COUNT':
             return {
                 ...state,
-                products: increaseCount(state.products, action.payload)
+                products: increaseCount(state, action.payload)
             };
         case 'DECREASE_COUNT':
             return {
                 ...state,
-                products: decreaseCount(state.products, action.payload)
+                products: decreaseCount(state, action.payload)
             };
         default:
             return state;

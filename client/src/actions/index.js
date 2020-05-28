@@ -1,5 +1,11 @@
 import PlaceholderService from '../services/placeholderService';
 
+export const setAppState = payload => dispatch => {
+    dispatch({
+        type: payload.type
+    });
+};
+
 export const getProducts = () => {
     return async (dispatch) => {
         try {
@@ -22,10 +28,11 @@ export const loadProducts = payload => dispatch => {
     })
 };
 
+// Login actions
 export const login = payload => dispatch => {
     dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: payload
+        type: payload.type,
+        payload: payload.payload
     });
 };
 

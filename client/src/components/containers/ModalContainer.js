@@ -2,7 +2,7 @@ import React from 'react';
 import ProductModal from '../product-modal/ProductModal';
 import { connect } from 'react-redux';
 import { openProductModal, hideProductModal, closeProductModal, addToBasket } from '../../actions/index';
-import { Overlay } from '../overlay/Overlay';
+import Overlay from '../overlay/Overlay';
 
 class ModalContainer extends React.Component {
     componentDidMount = () => {

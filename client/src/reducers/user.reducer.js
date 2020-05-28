@@ -1,5 +1,6 @@
 export const initialState = {
-    isLogged: false
+    isLogged: false,
+    userModel: ''
 };
 
 export const userReducer = (state = initialState, action) => {

@@ -8,6 +8,10 @@ class Basket extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+
+        };
+
         console.log(props);
     }
     componentDidMount = () => {
@@ -19,14 +23,15 @@ class Basket extends React.Component {
     };
 
     render() {
-        let basket = this.props.basketState.products.length > 0;
-        const orders = basket
+        let isProductInBasket = this.props.basketState.products.length > 0;
+        const orders = isProductInBasket
             ? this.props.basketState.products.map((item) =>
                 <div key={ item.item.id }>
                     <div className={'basket__item'}>
                         <div className={'item item-id'}>ID:{item.item.id}</div>
                         <div className={'item item-title'}>Title: {item.item.title}</div>
                         <div className={'item item-count'}>Count: {item.count}</div>
+                        <div className={'item item-price'}>Price: {item.item.price}</div>
                         <button onClick={() => this.props.increaseCount(item)}>Add</button>
                         <button onClick={() => this.props.decreaseCount(item)}>Minus</button>
                     </div>
@@ -44,6 +49,12 @@ class Basket extends React.Component {
             <div className={'basket'}>
                 <div className={'basket__container'}>
                     { orders }
+                    { isProductInBasket
+                        ? <div>
+                            <div className={'basket__total-price'}>Total price: {this.props.basketState.totalPrice}</div>
+                            <div className={'basket__make-order'}><a href={'/order-form'}>Order</a></div>
+                          </div>
+                        : '' }
                 </div>
             </div>
         )

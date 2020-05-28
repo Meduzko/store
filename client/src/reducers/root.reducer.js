@@ -4,10 +4,10 @@ export const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_APP_STATE':
+        case 'USER_AUTHENTICATED':
             return {
                 ...state,
-                isProductsLoad: !state.isProductsLoad,
+                isAuthenticated: !state.isAuthenticated
             };
         case 'GET_ERRORS':
             return {
@@ -17,4 +17,4 @@ export const rootReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};

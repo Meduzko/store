@@ -1,8 +1,9 @@
 import React from 'react';
+import { openProductModal, hideProductModal, closeProductModal, addToBasket } from '../../actions/index';
 
-export class Overlay extends React.Component {
+class Overlay extends React.Component {
     clickOutside = () => {
-        this.props.onHide({type:'HIDE_MODAL'});
+        this.props && this.props.onHide({type:'HIDE_MODAL'});
     };
 
     render() {
@@ -11,3 +12,5 @@ export class Overlay extends React.Component {
         )
     }
 }
+
+export default Overlay;
